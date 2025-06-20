@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio</title>
+    <link rel="stylesheet" href="style.css">
+    
+
+
+<body>
+    <div class="contenedor">
+        <main class="descripcion">
+            <section id="sobremi" class="contenido activo">
+                <div class="imagen-con-descripcion">
+                    <img src="img/perfil.webp" alt="Mi imagen">
+                        <div class="descripcion-hover">
+                            <h3>¡Hola! Soy Bryan Saltos</h3>
+                                <p>Tengo 24 años y actualmente estudio la carrera de Tecnologías de la Información en la Universidad Técnica de Manabí (UTM). Me gusta aprender sobre el desarrollo web y la innovación digital.</p>
+                        </div>
+                </div>
+            </section>
+
+            <section id="habilidades" class="contenido">
+                <h2>Hanilidades</h2>
+                <p>AUN NO SE...</p>
+            </section>
+
+            <section id="proyectos" class="contenido">
+                <h2>Proyectos</h2>
+                <p>NINGUNO...</p>
+            </section>
+
+            <section id="contacto" class="contenido">
+                <div class="contacto-flex">
+                    <a href="https://wa.me/593989940059" target="_blank">
+                        <img src="img/iconoW-Photoroom.png" alt="WhatsApp" class="whatsapp-icon">
+                    </a>
+                    <div class="form-container">
+                        <h2>Contáctame</h2>
+                            <form id="contact-form">
+                                <input type="text" name="user_name" placeholder="Tu nombre" required>
+                                <input type="email" name="user_email" placeholder="Tu correo" required>
+                                <textarea name="message" placeholder="Tu mensaje" rows="6" required></textarea>
+                                <button type="submit">Enviar Mensaje</button>
+                            </form>
+                    </div>
+                </div>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("9PSUWEaTquJm41hHa");
+        })();
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            emailjs.sendForm('mi_servicio_090909', 'template_hdce6gy', this)
+                .then(function() {
+                    alert('¡Mensaje enviado con éxito!');
+                    document.getElementById('contact-form').reset();
+                }, function(error) {
+                    alert('Hubo un error: ' + JSON.stringify(error));
+                });
+        });
+    </script>
+</section>
+            </section>
+        </main>
+
+        <aside class="navegacion">
+            <a href="#" data-target="sobremi" class="nav-link activo">Sobre mí</a>
+            <a href="#" data-target="habilidades" class="nav-link">Habilidades Técnicas</a>
+            <a href="#" data-target="proyectos" class="nav-link">Proyectos</a>
+            <a href="#" data-target="contacto" class="nav-link">Contacto</a>
+        </aside>
+
+    </div>
+    <footer class="footer">
+        @shifukakota
+    </footer>
+
+<script>
+    // Obtener todos los enlaces y secciones
+    const links = document.querySelectorAll('.nav-link');
+    const contenidos = document.querySelectorAll('.contenido');
+
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Quitar clase activo de todos los links
+            links.forEach(l => l.classList.remove('activo'));
+            // Agregar clase activo al link clickeado
+            link.classList.add('activo');
+
+            // Ocultar todas las secciones
+            contenidos.forEach(c => c.classList.remove('activo'));
+            // Mostrar la sección relacionada al link clickeado
+            const id = link.getAttribute('data-target');
+            document.getElementById(id).classList.add('activo');
+        });
+    });
+</script>
+
+<style>
+    /* Ocultar secciones no activas */
+    .contenido {
+        display: none;
+    }
+    .contenido.activo {
+        display: block;
+    }
+    /* Estilo para el link activo */
+    .nav-link.activo {
+        background-color: #2c5ca3;
+        color: white;
+    }
+</style>
+</body>
